@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Pricing Theory Assignment \#1}}\\[6pt]
+    Hashim Khan \quad | \quad 1013626881 \quad | \quad Sept 28, 2026
+\end{center}
+
+\hrule
+\vspace{1em}
+
+%==================================================
+\section*{Question 1}
+
+\subsection*{(a)}
+
+We need to buy stock for \$$K$ at time $T$. To replicate we can:
+\begin{enumerate}
+    \item Borrow $\dfrac{K}{(1+r)^{\tau}}$, \quad $\tau = T - t$
+    \item Buy stock, hold till forward expiry
+\end{enumerate}
+
+$\rightarrow$ This portfolio is worth
+\[
+\Pi_T = S_T - \frac{K}{(1+r)^{\tau}}\,(1+r)^{\tau} = S_T - K
+\]
+\[
+V_T = S_T - K \quad \text{(forward contract at time } T\text{)}
+\]
+
+Both our portfolio and the forward have the same value at maturity.
+
+$\therefore$ General expression for forward:
+\[
+\boxed{V_t = S_t - \frac{K}{(1+r)^{\tau}}}
+\]
+
+\subsection*{(b)}
+
+\[
+V_t = S_t - \frac{K}{(1+r)^{\tau}} = 55 - \frac{52}{(1.05)^{0.75}} = \$4.87
+\]
+
+\subsection*{(c)}
+
+\textbf{Sell forward for \$6}
+
+\begin{center}
+\begin{tabular}{l r @{\hspace{3em}} l r}
+\toprule
+\multicolumn{2}{c}{\textbf{Time $t$}} & \multicolumn{2}{c}{\textbf{Time $T$}} \\
+\midrule
+Sell forward & $+6$ & Close forward & $52 - S_T$ \\
+Buy stock & $-55$ & Share delivered & $+S_T$ \\
+Borrow $\frac{K}{(1+r)^{\tau}}$ & $+50.13$ & Return loan & $-52$ \\
+\midrule
+\textbf{Total} & $\mathbf{\$1.13}$ & \textbf{Total} & $\mathbf{0}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Buy forward for \$4}
+
+\begin{center}
+\begin{tabular}{l r @{\hspace{3em}} l r}
+\toprule
+\multicolumn{2}{c}{\textbf{Time $t$}} & \multicolumn{2}{c}{\textbf{Time $T$}} \\
+\midrule
+Buy forward & $-4$ & Forward & $S_T - 52$ \\
+Sell stock & $+55$ & Close short & $-S_T$ \\
+Lend & $-50.13$ & Loan repaid & $+52$ \\
+\midrule
+\textbf{Total} & $\mathbf{\$0.87}$ & \textbf{Total} & $\mathbf{0}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+To arb the mispriced forward we use two instruments:
+\begin{enumerate}
+    \item Forward $V_t$
+    \item Replicating portfolio $\Pi_t$
+\end{enumerate}
+We buy low \& sell high, noting that the replicating portfolio always equals the no arb value of the forward.
+
+
+%==================================================
+\section*{Question 2}
+
+\begin{center}
+\begin{tabular}{l c c c}
+\toprule
+State & 0 & $u$ & $d$ \\
+\midrule
+Stock (\$) & 60 & 75 & 48 \\
+Put (\$) & ? & 0 & 12 \\
+\bottomrule
+\end{tabular}
+\qquad
+$K = 60, \quad \text{payoff} = (60 - S_T)^+$
+\end{center}
+
+\subsection*{(a)}
+
+Let $B$ be the amount of bonds we have. Let $N$ be defined similarly for the stock.
+\[
+\begin{cases}
+75N + 1.04B = 0 \\
+48N + 1.04B = 12
+\end{cases}
+\]
+which gives
+\[
+27N = -12 \;\Rightarrow\; N = -\frac{12}{27} = -\frac{4}{9}
+\]
+Thus
+\[
+1.04B = -75\left(-\frac{4}{9}\right) \;\Rightarrow\; B = 32.05
+\]
+\[
+V_0 = 60\left(-\frac{4}{9}\right) + 32.05 = \$5.38
+\]
+
+\subsection*{(b)}
+
+\[
+1.04\,q_u + 1.04\,q_d = 1 \;\Rightarrow\; q_u + q_d = \frac{1}{1.04} = \frac{25}{26}
+\]
+\[
+75\,q_u + 48\,q_d = 60 \;\Rightarrow\; 75\,q_u + 48\left(\frac{25}{26} - q_u\right) = 60
+\]
+\[
+27\,q_u = \frac{180}{13} \;\Rightarrow\; q_u = \frac{20}{39}, \qquad q_d = \frac{35}{78}
+\]
+
+\subsection*{(c)}
+
+\[
+V_0 = \sum_i V_i\, q_i = 0\left(\frac{20}{39}\right) + 12\left(\frac{35}{78}\right) = \$5.38
+\]
+
+The feature via FTAP that admits no arb is the fact that the state price vector $q$ is strictly positive.
+
+%==================================================
+\section*{Question 3}
+
+New derivative:
+\[
+\delta_0 = 27, \qquad \delta_u = 30, \qquad \delta_d = 20
+\]
+\[
+\delta_0 = 30\,q_u + 20\,q_d = \$24.36 \;\rightarrow\; \text{No-arb price}
+\]
+
+$\rightarrow$ With only 2 states, 2 independent assets $\Rightarrow$ 2 state prices.
+
+Thus $\{S, B\}$ spans all possible payoffs in our market.
+
+$\rightarrow$ I would not purchase, as it is overpriced.
+
+\end{document}
